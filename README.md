@@ -28,6 +28,7 @@ sudo su
 The /opt directory is reserved for all the software and add-on packages that are not part of the default installation. Create a directory for your JDK installation:
 ```
 mkdir /opt/jdk
+apt-get install libc6-i386
 ```
 Download and and extract java into the /opt/jdk directory:
 ```
