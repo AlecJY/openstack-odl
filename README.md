@@ -20,31 +20,13 @@ Once those commands have completed, you'll need to install git.
 sudo apt-get install git
 ```
 Next we need to install java 7 manualy
-## Installing Oracle JDK
-In this section, you will need sudo privileges
+## Installing JDK
+Because Ubuntu 16.04 LTS no longer provides Oracle JDK 7 packages, so you need to install OpenJDK 7 yourself.
 ```
 sudo su
-```
-The /opt directory is reserved for all the software and add-on packages that are not part of the default installation. Create a directory for your JDK installation:
-```
-mkdir /opt/jdk
-apt-get install libc6-i386
-```
-Download and and extract java into the /opt/jdk directory:
-```
-cd /opt/jdk
-wget http://ftp.osuosl.org/pub/funtoo/distfiles/oracle-java/jdk-7u80-linux-i586.tar.gz
-tar -zxf jdk-7u80-linux-i586.tar.gz -C /opt/jdk
-```
-Verify that the file has been extracted into the /opt/jdk directory.
-```
-ls /opt/jdk
-```
-## Setting Oracle JDK as the default JVM
-In our case, the java executable is located under /opt/jdk/jdk1.8.0_05/bin/java . To set it as the default JVM in your machine run:
-```
-update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.7.0_80/bin/java 100
-update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.7.0_80/bin/javac 100
+add-apt-repository ppa:openjdk-r/ppa  
+apt-get update   
+apt-get install openjdk-7-jdk  
 ```
 ## Verify your installation
 Verify that java has been successfully configured by running:
@@ -55,14 +37,20 @@ update-alternatives --display javac
 The output should look like this:
 ```
 java - auto mode
-link currently points to /opt/jdk/jdk1.7.0_80/bin/java
-/opt/jdk/jdk1.7.0_80/bin/java - priority 100
-Current 'best' version is '/opt/jdk/jdk1.7.0_80/bin/java'.
+  link best version is /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+  link currently points to /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+  link java is /usr/bin/java
+  slave java.1.gz is /usr/share/man/man1/java.1.gz
+/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java - priority 1071
+  slave java.1.gz: /usr/lib/jvm/java-7-openjdk-amd64/jre/man/man1/java.1.gz
 
 javac - auto mode
-link currently points to /opt/jdk/jdk1.7.0_80/bin/javac
-/opt/jdk/jdk1.7.0_80/bin/javac - priority 100
-Current 'best' version is '/opt/jdk/jdk1.7.0_80/bin/javac'.
+  link best version is /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
+  link currently points to /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
+  link javac is /usr/bin/javac
+  slave javac.1.gz is /usr/share/man/man1/javac.1.gz
+/usr/lib/jvm/java-7-openjdk-amd64/bin/javac - priority 1071
+  slave javac.1.gz: /usr/lib/jvm/java-7-openjdk-amd64/man/man1/javac.1.gz
 ```
 Another easy way to check your installation is:
 ```
@@ -70,9 +58,9 @@ java -version
 ```
 The output should look like this:
 ```
-java version "1.8.0_05"
-Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+java version "1.7.0_95"
+OpenJDK Runtime Environment (IcedTea 2.6.4) (7u95-2.6.4-3)
+OpenJDK 64-Bit Server VM (build 24.95-b01, mixed mode)
 ```    
 # Clone devstack
 We're going to use git to clone devstack. To do this, go back to your terminal window and issue the following two commands:
